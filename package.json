@@ -7,6 +7,7 @@
     "dev": "nodemon --exec babel-node src/index.js",
     "start": "node build/index.js",
     "build": "babel src -d build",
+    "heroku-postbuild": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
