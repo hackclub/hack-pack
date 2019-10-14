@@ -20,6 +20,7 @@
     "nodemon": "^1.19.3"
   },
   "dependencies": {
+    "@octokit/request": "^5.2.1",
     "express": "^4.17.1"
   }
 }

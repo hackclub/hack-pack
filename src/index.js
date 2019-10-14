@@ -3,14 +3,38 @@ if (env === 'development') {
   require('dotenv').config()
 }
 
+import { request } from '@octokit/request'
+
 const PORT = process.env.PORT || 1234
 
 import express from 'express'
 
 const app = express()
 
-app.get('/', (req, res) => {
-  res.send('Hello, world!')
+app.get('/', async (req, res) => {
+  try {
+    const code = req.query.code
+    const ghResponse = await request(
+      'POST https://github.com/login/oauth/access_token',
+      {
+        headers: { Accept: 'application/json' },
+        data: {
+          client_id: process.env.CLIENT_ID,
+          client_secret: process.env.CLIENT_SECRET,
+          code,
+        },
+      }
+    )
+
+    const accessToken = ghResponse.data.access_token
+
+    const ghUser = await request('GET /user', {
+      headers: { Authorization: `token ${accessToken}` },
+    })
+    res.json(ghUser.data)
+  } catch (e) {
+    console.error(e)
+  }
 })
 
 app.listen(PORT, () => {
