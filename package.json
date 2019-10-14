@@ -15,9 +15,11 @@
     "@babel/cli": "^7.6.4",
     "@babel/core": "^7.6.4",
     "@babel/node": "^7.6.3",
+    "@babel/polyfill": "^7.6.0",
     "@babel/preset-env": "^7.6.3",
     "dotenv": "^8.1.0",
-    "nodemon": "^1.19.3"
+    "nodemon": "^1.19.3",
+    "regenerator-runtime": "^0.13.3"
   },
   "dependencies": {
     "@octokit/request": "^5.2.1",

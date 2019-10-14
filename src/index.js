@@ -1,13 +1,13 @@
+import { request } from '@octokit/request'
+import express from 'express'
+import 'regenerator-runtime'
+
 const env = process.env.NODE_ENV || 'development'
 if (env === 'development') {
   require('dotenv').config()
 }
 
-import { request } from '@octokit/request'
-
 const PORT = process.env.PORT || 1234
-
-import express from 'express'
 
 const app = express()
 
