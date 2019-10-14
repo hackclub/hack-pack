@@ -31,7 +31,11 @@ app.get('/', async (req, res) => {
     const ghUser = await request('GET /user', {
       headers: { Authorization: `token ${accessToken}` },
     })
-    res.json(ghUser.data)
+
+    res.redirect(
+      302,
+      `https://airtable.com/shrlf0NgVfVBI51hU?prefill_GitHub%20Username=${ghUser.data.login}`
+    )
   } catch (e) {
     console.error(e)
   }
