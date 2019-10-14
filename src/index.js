@@ -34,7 +34,7 @@ app.get('/', async (req, res) => {
 
     res.redirect(
       302,
-      `https://airtable.com/shrlf0NgVfVBI51hU?prefill_GitHub%20Username=${ghUser.data.login}`
+      `https://airtable.com/shrNMxeoANyxtVY8U?prefill_GitHub%20Username=${ghUser.data.login}`
     )
   } catch (e) {
     console.error(e)
