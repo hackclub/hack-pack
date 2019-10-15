@@ -22,13 +22,13 @@ app.get('/', async (req, res) => {
       // Let's send this wayward traveler back to the right path
 
       console.log(
-        'Got request without a code! Redirecting them to hack.af/pack'
+        'Got request without a code! Redirecting them to hack.af/pack.'
       )
       res.redirect(302, 'https://hack.af/pack')
       return
     }
 
-    console.log(`Got request with code '${code}`)
+    console.log(`Got request with code '${code}'.`)
 
     const ghResponse = await request(
       'POST https://github.com/login/oauth/access_token',
@@ -51,12 +51,12 @@ app.get('/', async (req, res) => {
     const username = ghUser.data && ghUser.data.login
     if (username) {
       console.log(
-        `GitHub tells me that this user is https://github.com/${username}. I'll redirect them to the Airtable`
+        `GitHub tells me that this user is 'https://github.com/${username}'. I'll redirect them to the Airtable.`
       )
       res.redirect(302, `${formUrl}?prefill_GitHub%20Username=${username}`)
     } else {
       console.log(
-        "GitHub doesn't recognize this user. I'll just send them to the Airtable with nothing prefilled"
+        "GitHub doesn't recognize this user. I'll just send them to the Airtable with nothing prefilled."
       )
       res.redirect(302, formUrl)
     }
