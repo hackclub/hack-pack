@@ -49,11 +49,12 @@ app.get('/', async (req, res) => {
     })
 
     const username = ghUser.data && ghUser.data.login
+    const email = ghUser.data && ghUser.data.email
     if (username) {
       console.log(
         `GitHub tells me that this user is 'https://github.com/${username}'. I'll redirect them to the Airtable.`
       )
-      res.redirect(302, `${formUrl}?prefill_GitHub%20Username=${username}`)
+      res.redirect(302, `${formUrl}?prefill_GitHub%20Username=${username}&prefil_GitHub%20Email=${email}`)
     } else {
       console.log(
         "GitHub doesn't recognize this user. I'll just send them to the Airtable with nothing prefilled."
