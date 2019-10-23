@@ -1,6 +1,7 @@
 import { request } from '@octokit/request'
 import express from 'express'
 import 'regenerator-runtime'
+import Airtable from 'airtable'
 
 const env = process.env.NODE_ENV || 'development'
 if (env === 'development') {
@@ -10,6 +11,20 @@ if (env === 'development') {
 const PORT = process.env.PORT || 1234
 
 const app = express()
+
+const createRecord = (baseName, record) => {
+  const base = new Airtable({ apiKey: process.env.AIRTABLE_KEY }).base(
+    process.env.AIRTABLE_GITHUB_BASE
+  )
+
+  base(baseName).create(record, (err, records) => {
+    if (err) {
+      console.error(err)
+    } else {
+      console.log('Created OAuth record', records)
+    }
+  })
+}
 
 app.get('/', async (req, res) => {
   const formUrl = 'https://airtable.com/shrNMxeoANyxtVY8U'
@@ -35,8 +50,8 @@ app.get('/', async (req, res) => {
       {
         headers: { Accept: 'application/json' },
         data: {
-          client_id: process.env.CLIENT_ID,
-          client_secret: process.env.CLIENT_SECRET,
+          client_id: process.env.GITHUB_CLIENT_ID,
+          client_secret: process.env.GITHUB_CLIENT_SECRET,
           code,
         },
       }
@@ -50,11 +65,20 @@ app.get('/', async (req, res) => {
 
     const username = ghUser.data && ghUser.data.login
     const email = ghUser.data && ghUser.data.email
+
     if (username) {
+      createRecord('GitHub OAuth', {
+        Username: username,
+        Email: email,
+        Code: code,
+      })
       console.log(
         `GitHub tells me that this user is 'https://github.com/${username}'. I'll redirect them to the Airtable.`
       )
-      res.redirect(302, `${formUrl}?prefill_GitHub%20Username=${username}&prefil_GitHub%20Email=${email}`)
+      res.redirect(
+        302,
+        `${formUrl}?prefill_GitHub%20Username=${username}&prefil_GitHub%20Email=${email}`
+      )
     } else {
       console.log(
         "GitHub doesn't recognize this user. I'll just send them to the Airtable with nothing prefilled."

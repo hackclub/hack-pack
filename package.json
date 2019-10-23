@@ -22,9 +22,10 @@
     "nodemon": "^1.19.3"
   },
   "dependencies": {
-    "regenerator-runtime": "^0.13.3",
     "@octokit/request": "^5.2.1",
-    "express": "^4.17.1"
+    "airtable": "^0.7.1",
+    "express": "^4.17.1",
+    "regenerator-runtime": "^0.13.3"
   },
   "heroku-run-build-script": true
 }
