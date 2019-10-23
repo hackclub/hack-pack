@@ -14,7 +14,7 @@ const app = express()
 
 const createRecord = (baseName, record) => {
   const base = new Airtable({ apiKey: process.env.AIRTABLE_KEY }).base(
-    process.env.AIRTABLE_GITHUB_BASE
+    process.env.AIRTABLE_SDP_BASE
   )
 
   base(baseName).create(record, (err, records) => {
