@@ -77,7 +77,7 @@ app.get('/', async (req, res) => {
       )
       res.redirect(
         302,
-        `${formUrl}?prefill_GitHub%20Username=${username}&prefil_GitHub%20Email=${email}`
+        `${formUrl}?prefill_GitHub%20Username=${username}&prefill_GitHub%20Email=${email}`
       )
     } else {
       console.log(
