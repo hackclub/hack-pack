@@ -28,7 +28,7 @@ const createRecord = (baseName, record) => {
 
 const toParam = obj =>
   '?' + Object.keys(obj)
-    .filter(key => key && key != 'null')
+    .filter(key => obj[key] && obj[key] != 'null')
     .map(key => (
     `${key}=${obj[key]}`
   )).join('&')
