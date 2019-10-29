@@ -26,6 +26,11 @@ const createRecord = (baseName, record) => {
   })
 }
 
+const toParam = obj =>
+  '?' + Object.keys(obj).filter(key => key).map(key => (
+    `${key}=${obj[key]}`
+  )).join('&')
+
 app.get('/', async (req, res) => {
   const formUrl = 'https://airtable.com/shrNMxeoANyxtVY8U'
 
@@ -65,6 +70,10 @@ app.get('/', async (req, res) => {
 
     const username = ghUser.data && ghUser.data.login
     const email = ghUser.data && ghUser.data.email
+    const params = toParam({
+      'prefill_GitHub%20Username': username,
+      'prefill_GitHub%20Email': email
+    })
 
     if (username) {
       createRecord('GitHub OAuth', {
@@ -77,7 +86,7 @@ app.get('/', async (req, res) => {
       )
       res.redirect(
         302,
-        `${formUrl}?prefill_GitHub%20Username=${username}&prefill_GitHub%20Email=${email}`
+        formUrl + params
       )
     } else {
       console.log(
