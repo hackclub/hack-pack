@@ -21,7 +21,7 @@ const createRecord = (baseName, record) => {
     if (err) {
       console.error(err)
     } else {
-      console.log('Created OAuth record', records)
+      console.log('Created OAuth record', records.id)
     }
   })
 }
