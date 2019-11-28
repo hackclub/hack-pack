@@ -1,6 +1,6 @@
-_Looking to apply for the pack? Go to ![hack.af/pack]_
-
 **:warning: This repo is deprecated in favor of https://github.com/hackclub/github-oauth**
+
+_Looking to apply for the pack? Go to https://hack.af/pack_
 
 # The *Hack Pack* auth server
 
