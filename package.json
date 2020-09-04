@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@octokit/request": "^5.2.1",
-    "airtable": "^0.7.1",
+    "airtable": "^0.7.2",
     "express": "^4.17.1",
     "regenerator-runtime": "^0.13.3"
   },
